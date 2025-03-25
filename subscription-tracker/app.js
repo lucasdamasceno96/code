@@ -5,6 +5,7 @@ import authRouter from './routes/auth.route.js';
 import useRouter from './routes/user.route.js';
 import subscriptionRouter from './routes/subscription.route.js';
 import connectDB from './database/mongodb.js';
+import errorMiddleware from './middlewares/error.mindleware.js';
 
 
 
@@ -13,6 +14,8 @@ const app = express();
 app.use('/api/v1/auth', authRouter);
 app.use('/api//v1/users', useRouter);
 app.use('/api//v1/subscriptions', subscriptionRouter);
+
+app.use(errorMiddleware);
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Subscription Tracker API');
