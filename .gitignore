@@ -1,0 +1,21 @@
+url-shortener/data/shortner.db
+*.db
+# Go binários
+/bin/
+/build/
+*.exe
+*.out
+
+# Módulos baixados (se necessário)
+vendor/
+
+# Banco de dados local
+*.db
+data/
+
+# Arquivos temporários
+*.log
+*.tmp
+
+# Configurações locais
+.env
