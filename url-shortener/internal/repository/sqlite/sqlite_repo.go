@@ -14,7 +14,7 @@ type sqliteRepo struct {
 func NewSQLiteRepo(db *sql.DB) *sqliteRepo {
 
 	createTableSQL := `CREATE TABLE IF NOT EXISTS short_urls(
-		id INTEGER PRIMARY KEU AUTOINCREMENT,
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		original_url TEXT NOT NULL,
 		short_code TEXT NOT NULL UNIQUE,
 		created_at TEXT NOT NULL
