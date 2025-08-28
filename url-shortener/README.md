@@ -1,9 +1,3 @@
-Of course\! Based on your entire journey building this project, from the initial tutorial to debugging and testing, here is a comprehensive `README.md` file in English.
-
-This file tells the story of the project: what you built, the challenges you overcame, and what you learned. It's perfect for a portfolio.
-
------
-
 # Go URL Shortener
 
 A robust and scalable URL shortening service built with Go, following Clean Architecture principles. This project was developed as a hands-on exercise to apply concepts of layered architecture, dependency injection, and testing in a real-world application.
