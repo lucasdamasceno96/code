@@ -42,6 +42,7 @@ func (h *URLHandler) ShortenURL(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to create short URL", http.StatusInternalServerError)
 		return
 	}
+	log.Printf("INFO: URL encurtada com sucesso: %s -> %s", req.URL, shortURL)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(ShortenResponse{ShortURL: shortURL})
