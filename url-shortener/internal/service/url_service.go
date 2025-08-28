@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"log"
 	"time"
 
 	"github.com/lucasdamasceno96/code/url-shortener/internal/config"
@@ -47,6 +48,7 @@ func (s *urlService) ShortenURL(originalURL string) (string, error) {
 	}
 
 	if err := s.repo.Save(shortURL); err != nil {
+		log.Printf("ERROR: Service layer failed to save at repo: %v", err)
 		return "", err
 	}
 

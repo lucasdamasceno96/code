@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -37,6 +38,7 @@ func (h *URLHandler) ShortenURL(w http.ResponseWriter, r *http.Request) {
 	}
 	shortURL, err := h.svc.ShortenURL(req.URL)
 	if err != nil {
+		log.Printf("ERROR: failed to call service ShortenURL: %v", err)
 		http.Error(w, "Failed to create short URL", http.StatusInternalServerError)
 		return
 	}

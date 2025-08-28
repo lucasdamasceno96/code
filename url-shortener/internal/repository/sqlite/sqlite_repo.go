@@ -3,6 +3,7 @@ package sqlite
 import (
 	"database/sql"
 	"errors"
+	"log"
 
 	"github.com/lucasdamasceno96/code/url-shortener/internal/domain"
 )
@@ -26,12 +27,18 @@ func NewSQLiteRepo(db *sql.DB) *sqliteRepo {
 }
 
 func (r *sqliteRepo) Save(shortURL *domain.ShortURL) error {
-	stmt, err := r.db.Prepare("INSET INTO short_urls(original_url, short_url, shortcode, created_at) VALUES(?,?,?)")
+	stmt, err := r.db.Prepare("INSERT INTO short_urls(original_url, short_code, created_at) VALUES(?,?,?)")
 	if err != nil {
+		log.Printf("ERROR: Faile in prepare the statement to SQL: %v", err)
 		return err
 	}
 	defer stmt.Close()
 	_, err = stmt.Exec(shortURL.Original, shortURL.ShortCode, shortURL.CreatedAt)
+	if err != nil {
+
+		log.Printf("ERROR: failed to execte statement on inserction: %v", err)
+		return err
+	}
 	return err
 }
 

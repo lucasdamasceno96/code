@@ -18,7 +18,7 @@ func main() {
 	cfg := config.Config{
 		ServerPort:   "8080",
 		BaseURL:      "http://localhost:8080",
-		FixedLetters: "k8s",
+		FixedLetters: "k8s-",
 		DBPath:       "./data/shortner.db",
 	}
 
