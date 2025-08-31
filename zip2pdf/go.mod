@@ -2,3 +2,5 @@
 module github.com/lucasdamasceno96/code/zip2pdf
 
 go 1.21
+
+require github.com/jung-kurt/gofpdf v1.16.2

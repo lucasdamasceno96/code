@@ -1,0 +1,9 @@
+# Ignorar o diretório do banco de dados local
+data/
+
+# Ignorar arquivos do Git
+.git
+.gitignore
+
+# Ignorar arquivos de configuração de editor
+.vscode/
