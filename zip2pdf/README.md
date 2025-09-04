@@ -26,7 +26,7 @@ To compile the binary, you need to have Go installed (version 1.18 or newer).
 
 1.  **Clone the repository (or create the files as described)**:
     ```bash
-    git clone [https://github.com/your-username/zip2pdf.git](https://github.com/your-username/zip2pdf.git)
+    git clone [https://github.com/lucasmasceno96/code/zip2pdf.git](https://github.com/lucasmasceno96/code/zip2pdf.git)
     cd zip2pdf
     ```
 
