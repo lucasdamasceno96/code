@@ -9,6 +9,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
+// Constants for PDF layout
 const (
 	fontFamily   = "Courier" // Monospaced font for code
 	fontSize     = 10
@@ -19,40 +20,38 @@ const (
 
 // GeneratePDF creates a single PDF document from multiple file data.
 func GeneratePDF(files []FileData, outputPath string) error {
-	// Create a new PDF instance.
+	// Create a new PDF instance with A4 size and mm units
 	pdf := gofpdf.New("P", "mm", "A4", "")
 
-	// Set a monospaced font that is good for code.
-	pdf.AddFont(fontFamily, "", "courier.json") // Assumes you have a font definition file
+	// Set document margins
+	pdf.SetMargins(pageMargin, pageMargin, pageMargin)
 
-	// Ensure the output directory exists.
+	// Ensure the output directory exists
 	if err := os.MkdirAll(filepath.Dir(outputPath), 0755); err != nil {
 		return fmt.Errorf("failed to create output directory: %w", err)
 	}
 
 	for _, file := range files {
-		// Add a new page for each file.
+		// Add a new page for each file
 		pdf.AddPage()
 
 		// --- Header ---
-		pdf.SetFont(fontFamily, "B", fontSize+2) // Bold for the header
+		pdf.SetFont(fontFamily, "B", fontSize+2) // Bold for header
 		pdf.Cell(0, headerHeight, file.Path)
 		pdf.Ln(headerHeight)
 
-		// --- Content ---
+		// --- File Content ---
 		pdf.SetFont(fontFamily, "", fontSize)
 
-		// gofpdf uses ISO-8859-1 encoding, so we need to convert our UTF-8 string.
-		// A simple way is to replace non-compatible runes, but a better way would be proper conversion.
-		// For simplicity, we use a built-in translator.
-		contentStr := string(file.Content)
+		// gofpdf uses ISO-8859-1 encoding, so translate UTF-8
 		tr := pdf.UnicodeTranslatorFromDescriptor("")
+		contentStr := string(file.Content)
 
-		// Write content line by line using MultiCell for automatic line breaks.
+		// Write content line by line with automatic wrapping
 		pdf.MultiCell(0, lineHeight, tr(contentStr), "", "", false)
 	}
 
-	// Save the PDF to the specified path.
+	// Save the PDF to the specified path
 	if err := pdf.OutputFileAndClose(outputPath); err != nil {
 		return fmt.Errorf("failed to save PDF: %w", err)
 	}
